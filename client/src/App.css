@@ -2,25 +2,48 @@ img {
   width: 100%;
 }
 
+body {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  padding-bottom: 50px;
+}
+
+.Modal {
+  position: absolute;
+  background-color: rgb(240,255,255); 
+  border-radius: 5%;
+}
+
 .landing {
   position: relative;
   background: url('img/background.jpg') no-repeat;
   background-size: cover;
   background-position: center;
-  height: 100vh;
-  margin-bottom: -50px;
+  height: 92vh;
   margin-top: -24px;
+  margin-bottom: -50px;
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+footer {
+  position: fixed; 
+  bottom: 0;
+  width: 100%;
 }
 
 .jumbotron {
-  background: url('img/jumb.jpg') no-repeat;
-  background-size: cover;
-  background-position: center;
-  border-radius: 6px ;
+  border-radius: 6px;
 }
 
 .landing-inner {
-  padding-top: 10%;
+  padding-top: 5%;
 }
 
 .profiles {
@@ -33,10 +56,6 @@ img {
 
 .card {
   background-color: rgb(240,248,255);
-}
-
-.landing-font {
-  font-family: 'Lato';
 }
 
 .dark-overlay {

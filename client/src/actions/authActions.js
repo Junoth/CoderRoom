@@ -3,6 +3,7 @@ import setAuthToken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 
 import { GET_ERRORS, SET_CURRENT_USER } from './types';
+import { closeModal } from './modalActions';
 
 // Register User
 export const registerUser = (userData, history) => dispatch => {
@@ -32,8 +33,13 @@ export const loginUser = (userData, history) => dispatch => {
       const decoded = jwt_decode(token);
       // Set current user
       dispatch(setCurrentUser(decoded));
-      // Jump to dashboard
+      console.log("1");
+      // Close current modal
+      dispatch(closeModal());
+      console.log("2");
+      // Jump to Dashboard
       history.push('/dashboard');
+      console.log("3");
     })
     .catch(err =>
       dispatch({

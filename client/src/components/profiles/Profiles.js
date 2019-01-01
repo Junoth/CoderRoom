@@ -31,10 +31,10 @@ class Profiles extends Component {
     return (
       <div className="profiles">
         <div className="container">
-        <div className="jumbotron jumbotron-fluid text-white text-center">
+        <div className="jumbotron jumbotron-fluid bg-primary text-center text-white">
           <div className="container">
-            <h1 className="display-4">Developer Profiles</h1>
-            <p className="lead">Browse and connect with developers</p>
+            <h1 className="display-4"><strong>Developer Profiles</strong></h1>
+            <p className="lead"><strong>Browse and connect with developers</strong></p>
           </div>
         </div>
         </div>

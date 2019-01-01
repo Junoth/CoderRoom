@@ -31,15 +31,21 @@ class Navbar extends Component {
     const authLinks = (
         <ul className="navbar-nav navbar-right">
             <li className="nav-item">
-                <Link className="nav-link" to="/feed">Post Feed</Link>
+            <a href="" onClick={this.onLogoutHandler} className="nav-link text-white">
+                <img
+                className="rounded-circle"
+                src={user.avatar}
+                alt={user.name}
+                style={{ width: '25px', marginRight: '5px' }}
+                title="You must have a Gravatar connected to your email to display an image"
+                />{' '}
+                Logout
+            </a>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to="/dashboard">Dashboard</Link>
-            </li>
-            <li className="nav-item">
-                <img className="rounded-circle" src={user.avatar} alt={user.name} style={{ width: '40px', marginRight: '5px' }} title="You must have a Gravatar connected to your email to display an image" />
-                {' '}
-                <button className="btn btn-sm btn-light" onClick={ this.onLogoutHandler }>Log out <i className="fas fa-sign-out-alt"></i></button>
+                <Link className="nav-link text-white" to="/dashboard">
+                    Dashboard
+                </Link>
             </li>
         </ul>
     );
@@ -56,9 +62,9 @@ class Navbar extends Component {
     );
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top mb-4">
+        <nav className="navbar navbar-expand-lg bg-primary navbar-fixed-top mb-4 text-white">
             <div className="container">
-                <Link className="navbar-brand" to="/"><i className="fas fa-laptop-code"></i> CoderRoom</Link>
+                <Link className="navbar-brand text-white" to="/"><i className="fas fa-laptop-code"></i> CoderRoom</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -66,7 +72,10 @@ class Navbar extends Component {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
                     <li className="nav-item active">
-                        <Link className="nav-link" to="profiles">Developers<span className="sr-only">(current)</span></Link>
+                        <Link className="nav-link text-white" to="/profiles">Developers</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link text-white" to="/feed">Post Feed</Link>
                     </li>
                     </ul>
                     { isAuthenticated ? authLinks : guestLinks }

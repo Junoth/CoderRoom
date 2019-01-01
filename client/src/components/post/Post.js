@@ -10,7 +10,6 @@ import { getPost } from '../../actions/postActions';
 
 class Post extends Component {
   componentDidMount() {
-    console.log("Post")
     this.props.getPost(this.props.match.params.id);
   }
 

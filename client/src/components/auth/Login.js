@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { loginUser } from '../../actions/authActions';
-import TextFieldGroup from '../common/TextFieldGroup';
+import LoginFieldGroup from '../common/LoginFieldGroup';
+import { Link } from 'react-router-dom';
+import { closeModal } from '../../actions/modalActions';
 
 class Login extends Component {
   state = {
@@ -45,12 +47,13 @@ class Login extends Component {
     return (
       <div className="login">
         <div className="container">
-          <h1 className="display-4 text-center">Log in <i className="fas fa-hand-point-right"></i></h1>
+          <h1 className="display-4 text-center"><strong>Log in</strong></h1>
           <p className="lead text-center">
-            Log in to your Yamy accoun
+            <strong>to your CoderRoom account</strong>
           </p>
           <form noValidate onSubmit={this.onSubmitHandler}>
-            <TextFieldGroup
+            <LoginFieldGroup
+              loginUser="true"
               placeholder="Email Adress"
               name="email"
               type="email"
@@ -58,7 +61,8 @@ class Login extends Component {
               onChange={this.onChangeHandler}
               error={errors.email}
             />
-            <TextFieldGroup
+            <LoginFieldGroup
+              loginPassword="false"
               placeholder="Password"
               name="password"
               type="password"
@@ -66,8 +70,11 @@ class Login extends Component {
               onChange={this.onChangeHandler}
               error={errors.password}
             />
-            <input type="submit" className="btn btn-info btn-block mt-4" />
+            <input type="submit" className="btn btn-primary btn-block mt-4 mb-4" />
           </form>
+          <div className="container text-center">
+            <small>Doesn't have an acount? <Link to="/register" onClick={this.props.closeModal}>Sign up</Link> now ! <span><i className="fas fa-arrow-circle-right"></i></span></small>
+          </div>
         </div>
       </div>
     )
@@ -85,4 +92,4 @@ const mapStateToProps = (state) => ({
   errors: state.errors
 })
 
-export default connect(mapStateToProps, { loginUser })(withRouter(Login));
+export default connect(mapStateToProps, { loginUser, closeModal })(withRouter(Login));

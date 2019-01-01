@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { registerUser } from '../../actions/authActions';
-import TextFieldGroup from '../../components/common/TextFieldGroup';
+import RegisterFieldGroup from '../../components/common/RegisterFieldGroup';
+import { Link } from 'react-router-dom';
+import { closeModal } from '../../actions/modalActions';
 
 class Register extends Component {
   state = {
@@ -44,19 +46,21 @@ class Register extends Component {
     return (
       <div className="register">
         <div className="container">
-          <h1 className="display-4 text-center">Sign up <i className="fas fa-hand-point-right"></i></h1>
-          <p className="lead text-center">
-            Sign up to your Yamy account
+          <h1 className="display-4 text-center text-black"><strong>Sign up</strong></h1>
+          <p className="lead text-center text-black">
+            <strong>to your CoderRoom account</strong>
           </p>
           <form noValidate onSubmit={ this.onSubmitHandler }>
-            <TextFieldGroup
+            <RegisterFieldGroup
+              registerUser="true"
               placeholder="Name"
               name="name"
               value={this.state.name}
               onChange={this.onChangeHandler}
               error={errors.name}
             />
-            <TextFieldGroup
+            <RegisterFieldGroup
+              registerEmail="true"
               placeholder="Email Address"
               name='email'
               type='email'
@@ -64,7 +68,8 @@ class Register extends Component {
               onChange={this.onChangeHandler}
               error={errors.email}
             />
-            <TextFieldGroup
+            <RegisterFieldGroup
+              registerPassword="true"
               placeholder="Password"
               name='password'
               type='password'
@@ -72,7 +77,8 @@ class Register extends Component {
               onChange={this.onChangeHandler}
               error={errors.password}
             />
-            <TextFieldGroup
+            <RegisterFieldGroup
+              registerPassword2="true"
               placeholder="Confirm Password"
               name='password2'
               type='password'
@@ -80,8 +86,11 @@ class Register extends Component {
               onChange={this.onChangeHandler}
               error={errors.password2}
             />
-            <input type="submit" className="btn btn-info btn-block mt-4" />
+            <input type="submit" className="btn btn-primary btn-block mt-4 mb-4" />
           </form>
+          <div className="container text-center">
+            <small>Alreay have an acount? <Link to="/login" onClick={this.props.closeModal}>Log in</Link> now ! <span><i className="fas fa-arrow-circle-right"></i></span></small>
+          </div>
         </div>
       </div>
     )
@@ -90,6 +99,7 @@ class Register extends Component {
 
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
@@ -99,4 +109,4 @@ const mapStateToProps = (state) => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { registerUser })(withRouter(Register));
+export default connect(mapStateToProps, { registerUser, closeModal })(withRouter(Register));

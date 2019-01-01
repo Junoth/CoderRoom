@@ -8,7 +8,6 @@ import { getPosts } from '../../actions/postActions';
 
 class Posts extends Component {
   componentDidMount() {
-    console.log("Posts");
     this.props.getPosts();
   }
 

@@ -13,16 +13,10 @@ const customStyles = {
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
     padding               : '30px',
-    width                 : '500px',
-    height                : '600px'   
+    width                 : '400px',
+    height                : '550px' 
   }
 };
-
-const closeButtonStyle = {
-    position: 'fixed',
-    top:   '0px',
-    right:    '0px' 
-}
 
 Modal.setAppElement('#root')
 
@@ -42,8 +36,10 @@ class LoginModal extends Component {
           isOpen={this.state.modalIsOpen}
           style={customStyles}
           contentLabel="Login"
+          className="Modal"
+          overlayClassName="Overlay"
         >
-          <button className="btn" style={closeButtonStyle} onClick={this.clickHandler}><i className="fas fa-times"></i></button>
+          <button type="button" className="close" aria-label="Close" onClick={this.clickHandler}><span aria-hidden="true">&times;</span></button>
           <Login /> 
         </Modal>
     );

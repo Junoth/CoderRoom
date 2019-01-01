@@ -10,7 +10,6 @@ import store from './store';
 import PrivateRoute from './components/common/PrivateRoute';
 
 import Navbar from './components/layout/Navbar';
-import Footer from './components/layout/Footer';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Landing from './components/layout/Landing';
@@ -56,7 +55,7 @@ class App extends Component {
       <Provider store={ store }>
         <Router>
           <div className="App">
-            <Navbar loginClick={this.loginChangeHandler} signupClick={this.signupChangeHandler}/>
+            <Navbar/>
             <ModalConductor />
             <Route exact path="/" component={Landing} />
               <div className="container">
@@ -64,6 +63,9 @@ class App extends Component {
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/profiles" component={Profiles} />
                 <Route exact path="/profile/:handle" component={Profile} />
+                <Route exact path="/feed" component={Posts} />
+                <Route exact path="/post/:id" component={Post} />
+                <Route exact path="/not-found" component={NotFound} />
                 <Switch>
                   <PrivateRoute exact path="/dashboard" component={Dashboard} />
                 </Switch>
@@ -79,15 +81,7 @@ class App extends Component {
                 <Switch>
                   <PrivateRoute exact path="/add-education" component={AddEducation} />
                 </Switch>
-                <Switch>
-                  <PrivateRoute exact path="/feed" component={Posts} />
-                </Switch>
-                <Switch>
-                  <PrivateRoute exact path="/post/:id" component={Post} />
-                </Switch>
-                <Route exact path="/not-found" component={NotFound} />
               </div>
-            <Footer />
           </div>
         </Router>
       </Provider>
