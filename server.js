@@ -31,8 +31,22 @@ require('./config/passport.js')(passport);
 // Use Routes
 app.use('/api/users', users);
 app.use('/api/profile', profile);
-app.use('/api/posts', posts)
+app.use('/api/posts', posts);
 
 const port = 5000;
 
-app.listen(port, () => console.log(`Server running on port ${port}`))
+server = app.listen(port, () => console.log(`Server running on port ${port}`))
+
+// Socket IO initialize
+const socket = require('socket.io');
+io = socket(server);
+
+// Use socket IO
+io.on('connection', (socket) => {
+    console.log(socket.id);
+
+    socket.on('SEND_MESSAGE', function(data){
+        socket.volatile.broadcast.emit('RECEIVE_MESSAGE', data);
+    });
+});
+

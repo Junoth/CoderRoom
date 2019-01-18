@@ -28,6 +28,10 @@ import ModalConductor from './components/modal/ModalConductor';
 import { clearCurrentProfile } from './actions/profileActions';
 import NotFound from './components/not-found/NotFound';
 
+import { Widget, addResponseMessage } from 'react-chat-widget';
+import 'react-chat-widget/lib/styles.css';
+import io from "socket.io-client";
+
 // Check for token
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -50,12 +54,38 @@ if (localStorage.jwtToken) {
 }
 
 class App extends Component {
+  constructor(props){
+    super(props);
+
+    this.socket = io('localhost:5000');
+  }
+
+  componentDidMount() {
+    addResponseMessage("Welcome! You've joined the chat room");
+  }
+
+  handleNewUserMessage = (newMessage) => {
+    this.socket.emit('SEND_MESSAGE', {
+      message: newMessage
+    })
+  }
+
   render() {
+
+    this.socket.on('RECEIVE_MESSAGE', function(data){
+      addResponseMessage(data.message);
+    });
+
      return (
       <Provider store={ store }>
         <Router>
           <div className="App">
             <Navbar/>
+            <Widget
+              handleNewUserMessage={this.handleNewUserMessage}
+              title="Chatting room"
+              subtitle="Communicate with online coders"
+            />
             <ModalConductor />
             <Route exact path="/" component={Landing} />
               <div className="container">
