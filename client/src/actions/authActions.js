@@ -9,7 +9,12 @@ import { closeModal } from './modalActions';
 export const registerUser = (userData, history) => dispatch => {
   axios
     .post('/api/users/register', userData)
-    .then(res => history.push('/login'))
+    .then(res => {
+      // close current modal
+      dispatch(closeModal());
+      // Jump to login page
+      history.push('/login');
+    })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -33,10 +38,8 @@ export const loginUser = (userData, history) => dispatch => {
       const decoded = jwt_decode(token);
       // Set current user
       dispatch(setCurrentUser(decoded));
-      console.log("1");
       // Close current modal
       dispatch(closeModal());
-      console.log("2");
       // Jump to Dashboard
       history.push('/dashboard');
       console.log("3");
